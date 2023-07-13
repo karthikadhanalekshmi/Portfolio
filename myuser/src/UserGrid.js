@@ -16,7 +16,7 @@ import {
 } from '@mui/material';
 import { saveAs } from 'file-saver';
 
-const UserGrid = () => {
+const UserGrid = ({ onEditUser, onAddUser })  => {
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [sortColumn, setSortColumn] = useState('');
@@ -126,6 +126,8 @@ const UserGrid = () => {
       <Button variant="contained" onClick={exportToCSV}>
         Export to CSV
       </Button>
+
+      <Button onClick={onAddUser}>Add User</Button>
       <TableContainer>
         <Table>
           <TableHead>
@@ -133,7 +135,8 @@ const UserGrid = () => {
               <TableCell>ID</TableCell>
               <TableCell>Name</TableCell>
               <TableCell>Username</TableCell>
-              <TableCell>Email</TableCell>
+              <TableCell>Email</TableCell>              
+              <TableCell>Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -143,6 +146,10 @@ const UserGrid = () => {
                 <TableCell>{user.name}</TableCell>
                 <TableCell>{user.username}</TableCell>
                 <TableCell>{user.email}</TableCell>
+                
+                <TableCell>
+                  <Button onClick={() => onEditUser(user)}>Edit</Button>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
